@@ -1,0 +1,35 @@
+import java.util.*;
+public class JamieAndAlarmSnooze {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		int x = sc.nextInt();
+		int hh = sc.nextInt();
+		int mm = sc.nextInt();
+		int count = 0;
+		if(String.valueOf(hh).contains("7") || String.valueOf(mm).contains("7")) {
+			System.out.println(0);
+			sc.close();
+			return;
+		}
+		while(true) {
+			mm -= x%60;
+			int factor = x / 60;
+			if(mm <= 0) {
+				mm += 60;
+				hh = hh - factor-1;
+				if(hh-factor-1<=0) {
+					hh += 24;
+				}
+				System.out.println("hh = ");
+			}
+			count++;
+			if(String.valueOf(hh).contains("7") || String.valueOf(mm).contains("7")){
+				System.out.println(count);
+				break;
+			}
+		}
+	}
+	
+}

@@ -1,0 +1,38 @@
+import java.util.*;
+public class SimpleTextEditor {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		Stack<Integer> stackOp = new Stack<Integer>();
+		Stack<String> stackText = new Stack<String>();
+		Stack<Integer> stackDel = new Stack<Integer>();
+		Stack<String> stackDelText = new Stack<String>();
+		String s = "";
+		while (n > 0) {
+			int choice = sc.nextInt();
+			stackOp.add(choice);
+			switch(choice) {
+			
+			case 1 :	
+					append(s, stackText);
+					
+					break;
+			case 2 :	int k = sc.nextInt();
+					stackDel.add(k);
+					stackDelText.add(s.substring(s.length()-k));
+					s = s.substring(0, s.length()-k);
+				
+			}
+			n--;
+		}
+	}
+
+	private static void append(String s, Stack<String> stackText) {
+		String W = sc.next();
+		s += W;
+		stackText.add(s);
+	}
+	
+}

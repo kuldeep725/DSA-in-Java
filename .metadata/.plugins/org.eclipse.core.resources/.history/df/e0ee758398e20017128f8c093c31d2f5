@@ -1,0 +1,36 @@
+import java.util.*;
+import edu.duke.*;
+
+public class CodonCount {
+
+	private HashMap<String, Integer> mCodon;
+	
+	public CodonCount () {
+		mCodon = new HashMap<String, Integer>();
+	}
+	
+	public void buildCodonMap (int start, String dna) {
+		
+		mCodon.clear();
+		for (int i = start; i < dna.length(); i++) {
+			
+			if (i + 3 < dna.length()) {
+				String str = dna.substring(i, i+3);
+				if (!mCodon.containsKey(str)){
+					mCodon.put(str, 1);
+				}
+				else {
+					mCodon.put(str, mCodon.get(str) + 1);
+				}
+				
+			}
+			
+		}
+		
+	}
+	public void tester () {
+		
+		FileResource fr = new FileResource();
+		
+	}
+}

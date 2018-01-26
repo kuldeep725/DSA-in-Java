@@ -1,0 +1,80 @@
+import java.util.*;
+public class CardGame {
+	
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+		ArrayList<Integer> max = new ArrayList<Integer>() ;
+//		int[] a = new int[n];
+		for(int i = 0; i < n; i++) {
+			int key = sc.nextInt();
+//			a[i] = key;
+			if(!max.contains(key)){
+				max.add(key);
+			}
+			if(map.containsKey(key)) {
+				int value = map.get(key);
+				map.put(key, value+1);
+			}
+			else {
+				map.put(key, 1);
+			}
+		}
+		max.sort(Collections.reverseOrder());
+		System.out.println(max);
+		System.out.println(map);
+		int ptr = 1;
+		while(!map.isEmpty()) {
+			int flag = 0;
+			int count = 0;
+			int key = 0;
+			for(int i = 0; i < max.size(); i++) {
+				count = map.get(max.get(i));
+				key = max.get(i);
+				if(count % 2 != 0) {
+					flag = 1;
+					break;
+				}
+			}
+			System.out.println("key = "+key);
+			if(flag == 0) {
+				System.out.println("flag = 0");
+				if(ptr % 2 == 1) {
+					System.out.println("Agasa");
+				}
+				else {
+					System.out.println("Conan");
+				}
+				break;
+			}
+			if(flag == 1) {
+				System.out.println("flag = 1");
+				HashMap<Integer, Integer> mapCopy = (HashMap<Integer, Integer>) map.clone();
+				for(Integer item : mapCopy.keySet()) {
+					if(item < key) {
+						map.remove(item);
+					}
+				}
+				map.put(key, map.get(key)-1);
+				if(map.get(key) == 0)	{
+					map.remove(key);
+					max.remove(key);
+				}
+			}
+			if(map.isEmpty()) {
+				if(ptr % 2 == 0) {
+					System.out.println("Agasa");
+				}
+				else {
+					System.out.println("Conan");
+				}
+			}
+			ptr++;
+		}
+		sc.close();
+		
+	}
+	
+}

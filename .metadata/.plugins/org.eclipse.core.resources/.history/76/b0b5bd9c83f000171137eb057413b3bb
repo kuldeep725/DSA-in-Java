@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class ArrayManipulation {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int m = in.nextInt();
+        int[] list = new int[n];
+        int max = Integer.MIN_VALUE;
+        for(int a0 = 0; a0 < m; a0++){
+            int a = in.nextInt();
+            int b = in.nextInt();
+            int k = in.nextInt();
+            for(int i = a-1; i < b; i++) {
+                list[i] += k;
+                System.out.println(i + " : " + list[i]);
+                if(list[i] > max)   max = list[i];
+            }
+        }
+        System.out.print(max);
+        in.close();
+    }
+}

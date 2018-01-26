@@ -1,0 +1,31 @@
+import java.util.*;
+public class SimpleTextEditor {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		Stack<Integer> stackOp = new Stack<Integer>();
+		Stack<String> stackText = new Stack<String>();
+		String s = "";
+		s = "hello";
+		System.out.println("hey");
+		System.out.println(s.substring(0, 0));
+//		while (n > 0) {
+//			int choice = sc.nextInt();
+//			stackOp.add(choice);
+//			switch(choice) {
+//			
+//			case 1 :	String W = sc.next();
+//					s += W;
+//					stackText.add(s);
+//					break;
+//			case 2 :	int k = sc.nextInt();
+//					s = s.substring(0, s.length()-k);
+//				
+//			}
+//			n--;
+//		}
+	}
+	
+}

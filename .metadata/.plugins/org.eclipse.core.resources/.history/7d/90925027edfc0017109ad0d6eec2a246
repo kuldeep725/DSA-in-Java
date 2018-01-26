@@ -1,0 +1,209 @@
+import java.util.*;
+
+public class PermuteDigits {
+	
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+//		int a = sc.nextInt();
+//		int b =sc.nextInt();
+		String a =sc.next();
+		String b = sc.next();
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		for (int i = 0; i < a.length(); i++) {
+			String key = String.valueOf(a.charAt(i));
+			if(!map.containsKey(key)) {
+//				System.out.println("if");
+				map.put(key, 1);
+			}
+			else {
+//				System.out.println("else");
+				int value = map.get(key);
+//				System.out.println("done");
+				map.put(key, value+1);
+			}
+		}
+//		char[] chSorted = a.toCharArray();
+//		Arrays.sort(chSorted);
+//		StringBuilder sb = new StringBuilder(new String(chSorted));
+//		sb.reverse();
+//		a = sb.toString();
+//		System.out.println("sorted a="+a);
+		
+//		System.out.println(map);
+		
+//		int lengthA = (int)(Math.log10(a) + 1);
+//		int lengthB = (int)(Math.log10(b) + 1);
+//		System.out.println("lengthA = " + lengthA);
+//		System.out.println("lenghB = "+lengthB);
+//		String out = "";
+//		if(a.length() < b.length()) {
+//			System.out.println(a);
+//			sc.close();
+//			return;
+//		}
+//		String out = "";
+		StringBuilder sb = new StringBuilder();
+		if(a.length() < b.length()) {
+			
+			for (int i = 9; i >= 0; i--) {
+				String key = String.valueOf(i);
+				if(map.containsKey(key)) {
+					map.put(key, map.get(key)-1);
+//					System.out.print(key);
+//					out += key;
+					sb.append(key);
+					if(map.get(key) == 0) 	map.remove(key);
+					else						 i++;
+				}
+			}
+		}
+		else {
+			int flag = 0;
+			
+			for(int i = 0; i < b.length(); i++) {
+				String key = String.valueOf(b.charAt(i));
+				int keyInt = Integer.parseInt(key);
+				int flagNone = 0;
+				
+				while(keyInt >= 0 && flag == 0) {
+					key = String.valueOf(keyInt);
+					if(map.containsKey(key)) {
+						map.put(key, map.get(key)-1);
+//						System.out.print(key);
+//						out += key;
+						sb.append(key);
+						if(Integer.parseInt(String.valueOf(b.charAt(i))) > keyInt) {
+							flag = 1;
+						}
+						flagNone = 1;
+						if(map.get(key) == 0) 	map.remove(key);
+						break;
+					}
+					keyInt--;
+				}
+				if(flagNone == 0) {
+					for(int j = i-1; j >= 0; j--) {
+						sb.deleteCharAt(j);
+						String keyFlag  = String.valueOf(a.charAt(j));
+						if(!map.containsKey(keyFlag)) {
+//							System.out.println("if");
+							map.put(keyFlag, 1);
+						}
+						else {
+//							System.out.println("else");
+							int value = map.get(keyFlag);
+//							System.out.println("done");
+							map.put(keyFlag, value+1);
+						}
+						for(int k = Integer.parseInt(keyFlag)-1; k >=0; k--) {
+							keyFlag = String.valueOf(k);
+							if(map.containsKey(keyFlag)) {
+								sb.append(keyFlag);
+								map.put(keyFlag, map.get(keyFlag)-1);
+								if(map.get(keyFlag) == 0) 	map.remove(keyFlag);
+								break;
+							}
+						}
+					}
+					flag = 1;
+					break;
+				}
+				if(flag == 1) {
+					break;
+				}
+				
+			}
+			if(flag == 1) {
+				for (int j = 9; j>= 0; j--) {
+				String key = String.valueOf(j);
+					if(map.containsKey(key)) {
+						map.put(key, map.get(key)-1);
+//						System.out.print(key);
+//						out += key;
+						sb.append(key);
+						if(map.get(key) == 0) 	map.remove(key);
+						else						 j++;
+					}
+				}
+			}
+			System.out.println(sb.toString());
+		}
+
+		//long output = Long.parseLong(out);
+//		System.out.println(out);
+//		System.out.println(out.compareTo(b));
+//		if(out.compareTo(b) > 0) {
+//			System.out.println("More work");
+//			StringBuilder sb = new StringBuilder(out);
+//			for(int i = 0; i < out.length()-1; i++) {
+//				char ch = sb.charAt(i);
+//				sb.setCharAt(i, sb.charAt(i+1));
+//				sb.setCharAt(i+1, ch);
+//				String ans = sb.toString();
+//				if(ans.compareTo(b) <= 0) {
+//					System.out.println(ans);
+//					break;
+//				}
+//			}
+//		}
+//		else {
+//			System.out.println(out);
+//		}
+		
+		sc.close();
+		
+	}
+//	for (int i = 0; i < sb.length(); i++) {
+//		String a_i = String.valueOf(a.charAt(i));
+//		String b_i = String.valueOf(b.charAt(i));
+//		if(a.compareTo(b) < 0){
+//			System.out.println(a);
+//			break;
+//		}
+//		else {
+//			for(int j = i+1; j < sb.length(); j++) {
+//				char ch = sb.charAt(i);
+//				sb.setCharAt(i, sb.charAt(j));
+//				sb.setCharAt(j, ch);
+//				a = sb.toString();
+//			}
+//		}
+//	}
+//	private static int flag = 0;
+//	private static void permute(String a, String b, int l, int r)
+//	{
+//	        if (l == r) {
+//	            System.out.println(a);
+////	            if(a.compareTo(b) < 0) {
+////	        	    System.out.println("a = "+a);
+////	        	    flag = 1;
+////	        	    return;
+////	            }
+//	        }
+//	        else
+//	        {
+//	            for (int i = l; i <= r; i++)
+//	            {
+////	        	if(flag == 1) 	return;    
+//	                a = swap(a, l, i);
+//	                permute(a, b, l+1, r);
+//	                a = swap(a,l,i);
+//	            }
+//	        }
+//	}
+//	 
+//	    public static String swap(String a, int i, int j)
+//	    {
+//	        char temp;
+//	        char[] charArray = a.toCharArray();
+//	        temp = charArray[i] ;
+//	        charArray[i] = charArray[j];
+//	        charArray[j] = temp;
+//	        return String.valueOf(charArray);
+//	    }
+	 
+
+}
+
+

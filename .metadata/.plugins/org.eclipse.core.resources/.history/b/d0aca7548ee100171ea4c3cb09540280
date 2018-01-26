@@ -1,0 +1,14 @@
+import edu.duke.FileResource;
+
+
+public class W5S1PTest {
+
+	public static void main(String[] args) {
+		
+		W5S1P test = new W5S1P();
+		FileResource fr = new FileResource();
+		test.totalBirths(fr);
+		
+	}
+	
+}

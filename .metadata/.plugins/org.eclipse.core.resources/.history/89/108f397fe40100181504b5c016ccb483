@@ -1,0 +1,38 @@
+import java.util.*;
+public class PartyLemonade {
+	
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int l = sc.nextInt();
+		double price[] = new double[n];
+		int a[]  = new int[n];
+		HashMap<Double, Integer> map = new HashMap<Double, Integer>();
+		HashMap<Double, Integer> pow = new HashMap<Double, Integer>();
+		long sum = 0;
+		for(int i = 0; i  < n; i++) {
+			a[i] = sc.nextInt();
+			price[i] = a[i]/(Math.pow(2, i));
+			map.put(price[i], a[i]);
+			pow.put(price[i], (int)Math.pow(2, i));
+		}
+		Arrays.sort(price);
+		for(int i = 0; i  < n; i++) {
+			int val = map.get(price[i]);
+			System.out.println("val = "+val);
+			int litre = pow.get(price[i]);
+			System.out.println("litre = "+litre);
+			int fact = l/litre;
+			if(fact == 0)		fact++;
+			l = l - fact*litre;
+			sum += val * fact;
+			if (l < 0) {
+				break;
+			}
+		}
+		System.out.println(sum);
+		sc.close();
+	}
+
+}

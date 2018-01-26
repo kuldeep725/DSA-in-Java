@@ -1,0 +1,24 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Waiter {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int q = in.nextInt();
+        int[] number = new int[n];
+        Stack<Integer> stack = new Stack<Integer>();
+        for(int number_i = 0; number_i < n; number_i++){
+            number[number_i] = in.nextInt();
+            stack.add(number[number_i]);
+        }
+        
+        for (int i = 0; i < q; i++) {
+        	
+        }
+    }
+}

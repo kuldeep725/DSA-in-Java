@@ -1,0 +1,67 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Waiter {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int q = in.nextInt();
+        int[] number = new int[n];
+//        int[][] b = new int[q][n];
+//        int[][] a = new int[q][n];
+        ArrayList<Integer> a[] = new ArrayList[q];
+        ArrayList<Integer> b[] = new ArrayList[q];
+        
+        int[] primeSet = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53};
+        Stack<Integer> stack = new Stack<Integer>();
+        for(int number_i = 0; number_i < n; number_i++){
+            number[number_i] = in.nextInt();
+            stack.add(number[number_i]);
+        }
+        
+        for (int i = 0; i < q; i++) {
+        	int count_b = 0;
+        	int count_a = 0;
+        	while (!stack.isEmpty()) {
+        		int num = stack.pop();
+        		if (num % primeSet[i] == 0) {
+//        			b[i][count_b++] = num;
+        			b[i].add(num);
+        		}
+        		else {
+//        			a[i][count_a++] = num;
+        			a[i].add(num);
+        		}
+        	}
+        	stack = getNewStack(a[i]);
+        }
+        for (int i = 0; i < q; i++) {
+        	stack = getNewStack(b[i]);
+        	while(!stack.isEmpty()) {
+        		int toPrint = stack.pop();
+        		/*if (toPrint != 0)*/	System.out.println(toPrint);
+        	}
+        	if (i == q-1) {
+        		stack = getNewStack(a[i]);
+        		while(!stack.isEmpty()) {
+        			int toPrint = stack.pop();
+                		/*if (toPrint != 0)*/	System.out.println(toPrint);
+        		}
+        	}
+        }
+    }
+
+	private static Stack<Integer> getNewStack(ArrayList<Integer> a) {
+		
+		Stack<Integer> stack = new Stack<Integer>();
+		for (int i = 0; i < a.size(); i++) {
+//			stack.add(a[i]);
+			stack.add(a.get(i));
+		}
+		return stack;
+	}
+}

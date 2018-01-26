@@ -1,0 +1,54 @@
+import edu.duke.StorageResource;
+
+public class W3S3P1 {
+	
+	public void getAllGenes (String dna) {
+		
+		StorageResource geneList  = new StorageResource();
+		int index = 0;
+		String gene = findGene (dna, 0);
+		while (!gene.isEmpty())  {
+			
+			geneList.add(gene);
+			index = dna.indexOf(gene, index + gene.length());
+			gene = findGene (dna, index);
+			
+		}
+		
+	}
+
+	private String findGene (String dna, int where) {
+		
+		String resultGene = "";
+		int startIndex = dna.indexOf("ATG", where);
+		if (startIndex == -1) 	return resultGene;
+		int taaIndex = findStopCodon (dna, startIndex, "TAA");
+		int tgaIndex = findStopCodon (dna, startIndex, "TGA");
+		int tagIndex = findStopCodon (dna, startIndex, "TAG");
+		int minIndex = Math.min(taaIndex, Math.min(tgaIndex, tagIndex));
+		
+//		System.out.println("taaIndex = " + taaIndex);
+//		System.out.println("minIndex =  "+minIndex);
+		if (minIndex == dna.length()) 		return resultGene;
+		resultGene = dna.substring(startIndex, minIndex + 3);
+		return resultGene;
+		
+	}
+	
+	public int findStopCodon (String dna, int startIndex, String stopCodon) {
+		
+		int currentIndex = dna.indexOf(stopCodon, startIndex);
+//		System.out.println("currentIndex = " + currentIndex);
+		
+		while (currentIndex != -1) {
+			
+			if ((currentIndex - startIndex) % 3 == 0) {
+				return currentIndex;
+			}
+			currentIndex = dna.indexOf(stopCodon, currentIndex + 1);
+//			System.out.println("this = " + currentIndex);
+		}
+		return dna.length();
+		
+	}
+}

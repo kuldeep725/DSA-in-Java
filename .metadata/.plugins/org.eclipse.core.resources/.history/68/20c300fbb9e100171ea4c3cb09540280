@@ -1,0 +1,40 @@
+import java.io.File;
+import edu.duke.DirectoryResource;
+import edu.duke.ImageResource;
+import edu.duke.Pixel;
+
+public class W5S2P1 {
+	
+	public ImageResource makeGray (ImageResource infile) {
+		
+		ImageResource outfile = new ImageResource(infile.getWidth(), infile.getHeight());
+		for (Pixel pixel : outfile.pixels()) {
+			
+			Pixel inpixel = infile.getPixel(pixel.getX(), pixel.getY());
+			int av = (inpixel.getRed() + inpixel.getBlue() + inpixel.getGreen()) / 3;
+			pixel.setRed(av);
+			pixel.setBlue(av);
+			pixel.setGreen(av);
+			
+		}
+		return outfile;
+		
+	}
+	
+	public void testMakeGray () {
+		
+		DirectoryResource dr = new DirectoryResource();
+		for (File f : dr.selectedFiles()) {
+			
+			ImageResource ir = new ImageResource(f);
+			ImageResource grayImage = makeGray(ir);
+//			ir.draw();
+			String infileName = ir.getFileName();
+			grayImage.setFileName("copy-" + infileName);
+			grayImage.draw();
+			
+		}
+		
+	}
+
+}

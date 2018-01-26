@@ -1,0 +1,31 @@
+import java.util.*;
+public class ArrayManipulation {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int m = in.nextInt();
+        long[] list = new long[n];
+        long max = Long.MIN_VALUE;
+        List<Integer> myList = new ArrayList<Integer>();
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        map.put(0, 100);
+        map.put(1,  200);
+        map.put(2, 150);
+        int  maxi = Collections.max(map.values());
+        System.out.println("maxi = "+maxi);
+//        Collections.max(myList);
+        for(int a0 = 0; a0 < m; a0++){
+            int a = in.nextInt();
+            int b = in.nextInt();
+            int k = in.nextInt();
+            for(int i = a-1; i < b; i++) {
+                list[i] += k;
+//                System.out.println(i + " : " + list[i]);
+                if(list[i] > max)   max = list[i];
+            }
+        }
+        System.out.print(max);
+        in.close();
+    }
+}

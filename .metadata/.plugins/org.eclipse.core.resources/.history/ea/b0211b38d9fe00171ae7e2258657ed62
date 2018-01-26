@@ -1,0 +1,51 @@
+import java.util.Scanner;
+
+
+public class MultipleOfThree {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		int t = sc.nextInt();
+		while(t-- >0) {
+			
+			long  k = sc.nextLong();
+//			int d[] = new int[k];
+			int d0 = sc.nextInt();
+			int d1 = sc.nextInt();
+			long  sum = d0+d1;
+			for(int i = 2; i < k; i++) {
+				if(sum == 18) {
+					System.out.println("i ="+i);
+					long fact = (k-i-1)%4;
+					System.out.println("fact="+fact);
+					if(fact ==0) {
+						sum = sum+(20*(k-i-1/4))+ 8;
+					}
+					else if(fact == 1) {
+						sum = sum  + (20*(k-i-1/4)) +14;
+					}
+					else if(fact ==2) {
+						sum = sum + (20*(k-i-1/4))+16;
+					}
+					else if(fact == 3) {
+						sum = sum + (20*(k-i-1/4))+20;
+					}
+					break;
+				}
+				long val = sum % 10;
+				sum += val;
+			}
+			System.out.println("sum="+sum);
+			if(sum % 3 == 0) {
+				System.out.println("YES");
+			}
+			else {
+				System.out.println("NO");
+			}
+			
+		}
+		sc.close();
+	}
+	
+}

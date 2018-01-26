@@ -1,0 +1,62 @@
+import java.util.*;
+public class SimpleTextEditor {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		Stack<Integer> stackOp = new Stack<Integer>();
+		Stack<String> stackText = new Stack<String>();
+//		Stack<Integer> stackDel = new Stack<Integer>();
+		Stack<String> stackDelText = new Stack<String>();
+		String s = "";
+		while (n > 0) {
+			int choice = sc.nextInt();
+			switch(choice) {
+			
+			case 1 :	stackOp.add(1);
+					String W = sc.next();
+					s = append(s, W, stackText);
+					break;
+					
+			case 2 :	stackOp.add(2);
+					int k = sc.nextInt();
+					s = delete(s, k, stackDelText);
+//					stackDel.add(k);
+					break;
+					
+			case 3 :	int index = sc.nextInt();
+					System.out.println(index-1);
+//					System.out.println(s);
+					System.out.println(s.charAt(index-1));
+					break;
+					
+			case 4 :	int lastChoice = stackOp.pop();
+					if (lastChoice == 1) {
+						String lastStr = stackText.pop();
+						s = delete(s, lastStr.length(), stackDelText);
+					}
+					else if (lastChoice == 2) {
+						String newStr = stackDelText.pop();
+						s = append(s, newStr, stackText);
+						
+					}
+			}
+			n--;
+		}
+		sc.close();
+	}
+
+	private static String delete(String s, int k, Stack<String> stackDelText) {
+		stackDelText.add(s.substring(s.length()-k));
+		s = s.substring(0, s.length()-k);
+		return s;
+	}
+
+	private static String append(String s, String W, Stack<String> stackText) {
+		s += W;
+		stackText.add(W);
+		return s;
+	}
+	
+}

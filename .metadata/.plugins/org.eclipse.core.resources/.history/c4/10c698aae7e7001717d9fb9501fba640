@@ -1,0 +1,84 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Waiter {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int q = in.nextInt();
+        int[] number = new int[n];
+//        int[][] b = new int[q][n];
+//        int[][] a = new int[q][n];
+//        ArrayList<Integer> a[] = new ArrayList[q];
+//        ArrayList<Integer> b[] = new ArrayList[q];
+          List<List<Integer>> listA = new ArrayList<List<Integer>>(q);
+          List<List<Integer>> listB = new ArrayList<List<Integer>>(q);
+        
+//        int[] primeSet = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73};
+        int[] primeSet = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,
+        				101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199};
+        
+        Stack<Integer> stack = new Stack<Integer>();
+        for(int number_i = 0; number_i < n; number_i++){
+            number[number_i] = in.nextInt();
+            stack.add(number[number_i]);
+        }
+        
+        for (int i = 0; i < q; i++) {
+        	int count_b = 0;
+        	int count_a = 0;
+        	List<Integer> a = new ArrayList<Integer>();
+        	List<Integer> b = new ArrayList<Integer>();
+        	while (!stack.isEmpty()) {
+        		int num = stack.pop();
+        		if (num % primeSet[i] == 0) {
+//        			b[i][count_b++] = num;
+        			b.add(num);
+        		}
+        		else {
+//        			a[i][count_a++] = num;
+        			a.add(num);
+        		}
+        	}
+        	listA.add(a);
+        	listB.add(b);
+        	stack = getNewStack(a);
+        }
+        System.out.println(listA.get(0).toString());
+        System.out.println(listA.get(1).toString());
+        System.out.println(listB.get(0).toString());
+        System.out.println(listB.get(1).toString());
+        for (int i = 0; i < q; i++) {
+        	stack = getNewStack(listB.get(i));
+        	while(!stack.isEmpty()) {
+        		int toPrint = stack.pop();
+//        		/*if (toPrint != 0)*/	System.out.println(toPrint);
+        	}
+        	if (i == q-1) {
+        		stack = getNewStack(listA.get(i));
+        		while(!stack.isEmpty()) {
+        			int toPrint = stack.pop();
+//                		/*if (toPrint != 0)*/	System.out.println(toPrint);
+        		}
+        	}
+        }
+    }
+
+	private static Stack<Integer> getNewStack(List<Integer> a) {
+		
+		Stack<Integer> stack = new Stack<Integer>();
+		for (int i = 0; i < a.size(); i++) {
+//			stack.add(a[i]);
+			stack.add(a.get(i));
+			System.out.println(a.get(i));
+			System.out.println();
+		}
+		return stack;
+	}
+}
+//12 1
+//10 5 7 6 4 8 11 2 9 10 5 7

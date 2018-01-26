@@ -1,0 +1,18 @@
+import edu.duke.StorageResource;
+
+
+public class W3S3P1Test {
+
+	public static void main(String[] args) {
+		
+		W3S3P1 test = new W3S3P1();
+		StorageResource geneList1 = test.getAllGenes("");
+		StorageResource geneList2 = test.getAllGenes("AAATGAATTGATTATGTTATATTAGTTATTAATGGGTAATTAGTAGTTTTGGG");
+		System.out.println("geneList1");
+		for (String gene : geneList1.data()) {
+			System.out.println(gene);
+		}
+		
+	}
+	
+}

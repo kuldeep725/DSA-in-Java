@@ -1,0 +1,21 @@
+import edu.duke.FileResource;
+
+public class W5S1PTest {
+
+	public static void main(String[] args) {
+		
+		W5S1P test = new W5S1P();
+//		FileResource fr = new FileResource();
+//		test.totalBirths(fr);
+//		int rank = test.getRank​("Olivia", "F", 2012);
+//		System.out.println(rank);
+//		String name = test.getName(2012, 5, "M");
+//		System.out.println(name);
+//		test.whatIsNameInYear​("Isabella"	, 2012, 2014, "F");
+//		int year = test.yearOfHighestRank​("Mason", "M");
+//		System.out.println(year);
+		double av = test.getAverageRank​("Mason", "M");
+		System.out.println(av);
+	}
+	
+}

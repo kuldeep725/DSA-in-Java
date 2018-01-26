@@ -1,0 +1,22 @@
+import edu.duke.ImageResource;
+import edu.duke.Pixel;
+
+public class W5S2P1 {
+	
+	public void makeGray (ImageResource infile) {
+		
+		ImageResource outfile = new ImageResource(infile);
+		for (Pixel pixel : outfile.pixels()) {
+			
+			Pixel inpixel = infile.getPixel(infile.getWidth(), infile.getHeight());
+			int av = (inpixel.getRed() + inpixel.getBlue() + inpixel.getGreen()) / 3;
+			pixel.setRed(av);
+			pixel.setBlue(av);
+			pixel.setGreen(av);
+			
+		}
+		
+		
+	}
+
+}
